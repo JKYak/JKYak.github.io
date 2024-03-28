@@ -1,3 +1,5 @@
+http://example.com/tags/index.html
+http://example.com/categories/index.html
 http://example.com/2024/03/27/Helloworld/
 http://example.com/2024/03/27/hello-world/
 http://example.com/
