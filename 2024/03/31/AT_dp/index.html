@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>AT_dp | kketchup的小窝</title><meta name="author" content="JKY"><meta name="copyright" content="JKY"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="闲话DP 太菜了，刷 AT 经典 DP，前面的比较简单，从 J 开始吧 qwq  AT_dp_J 期望 DP  传送门 注意到 $a_i\leq3$，所以状态应该跟 $a_i$ 有关。考虑设 $f_{a,b,c,d}$ 表示有 $a$ 种剩余 $3$ 个的寿司，$b$ 种剩余 $2$ 个的寿司…… $$f_{a,b,c,d}&#x3D;1+\frac{a}{n}f_{a-1,b+1,c,d}+\f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AT_dp">
+<meta property="og:url" content="http://example.com/2024/03/31/AT_dp/index.html">
+<meta property="og:site_name" content="kketchup的小窝">
+<meta property="og:description" content="闲话DP 太菜了，刷 AT 经典 DP，前面的比较简单，从 J 开始吧 qwq  AT_dp_J 期望 DP  传送门 注意到 $a_i\leq3$，所以状态应该跟 $a_i$ 有关。考虑设 $f_{a,b,c,d}$ 表示有 $a$ 种剩余 $3$ 个的寿司，$b$ 种剩余 $2$ 个的寿司…… $$f_{a,b,c,d}&#x3D;1+\frac{a}{n}f_{a-1,b+1,c,d}+\f">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/4.webp">
+<meta property="article:published_time" content="2024-03-31T13:58:15.360Z">
+<meta property="article:modified_time" content="2024-04-01T14:32:47.062Z">
+<meta property="article:author" content="JKY">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/4.webp"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="http://example.com/2024/03/31/AT_dp/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AT_dp',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-04-01 22:32:47'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="kketchup的小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/4.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="kketchup的小窝"><span class="site-name">kketchup的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AT_dp</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-31T13:58:15.360Z" title="发表于 2024-03-31 21:58:15">2024-03-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-04-01T14:32:47.062Z" title="更新于 2024-04-01 22:32:47">2024-04-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>23分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="AT_dp"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="闲话"><a href="#闲话" class="headerlink" title="闲话"></a>闲话</h2><p>DP 太菜了，刷 AT 经典 DP，前面的比较简单，从 J 开始吧 qwq</p>
+<hr>
+<h3 id="AT-dp-J"><a href="#AT-dp-J" class="headerlink" title="AT_dp_J"></a>AT_dp_J</h3><ul>
+<li>期望 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_j">传送门</a></p>
+<p>注意到 $a_i\leq3$，所以状态应该跟 $a_i$ 有关。考虑设 $f_{a,b,c,d}$ 表示有 $a$ 种剩余 $3$ 个的寿司，$b$ 种剩余 $2$ 个的寿司……</p>
+<p>$$f_{a,b,c,d}&#x3D;1+\frac{a}{n}f_{a-1,b+1,c,d}+\frac{b}{n}f_{a,b-1,c+1,d}+\frac{c}{n}f_{a,b,c-1,d+1}+\frac{d}{n}f_{a,b,c,d}$$<br>整理并可得<br>$$f_{a,b,c,d}&#x3D;\frac{n}{n-d}+\frac{a}{n-d}f_{a-1,b+1,c,d}+\frac{b}{n-d}f_{a,b-1,c+1,d}+\frac{c}{n-d}f_{a,b,c-1,d+1}$$</p>
+<p>这样是四维的，发现 $d&#x3D;n-(a+b+c)$，于是变成 $3$ 维，可以 $O(n^3)$ 的 DP，得到最终方程</p>
+<p>$$f_{a,b,c}&#x3D;\frac{n}{a+b+c}+\frac{a}{a+b+c}f_{a-1,b+1,c}+\frac{b}{a+b+c}f_{a,b-1,c+1}+\frac{c}{a+b+c}f_{a,b,c-1}$$</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">cin&gt;&gt;n;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,x;i&lt;=n;++i) cin&gt;&gt;x,a[x]++;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=n;++i)</span><br><span class="line">  	<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;=n;++j)</span><br><span class="line">    	<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;=n;++k)</span><br><span class="line">      	<span class="keyword">if</span>(i+j+k)&#123;</span><br><span class="line">        	<span class="type">double</span> p=i+j+k;</span><br><span class="line">        	<span class="keyword">if</span>(i) f[i][j][k]+=(<span class="number">1.0</span>*i/p*f[i<span class="number">-1</span>][j+<span class="number">1</span>][k]);</span><br><span class="line">        	<span class="keyword">if</span>(j) f[i][j][k]+=(<span class="number">1.0</span>*j/p*f[i][j<span class="number">-1</span>][k+<span class="number">1</span>]);</span><br><span class="line">        	<span class="keyword">if</span>(k) f[i][j][k]+=(<span class="number">1.0</span>*k/p*f[i][j][k<span class="number">-1</span>]);</span><br><span class="line">        	f[i][j][k]+=<span class="number">1.0</span>*n/p;</span><br><span class="line">      	&#125;</span><br><span class="line">cout&lt;&lt;fixed&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;f[a[<span class="number">3</span>]][a[<span class="number">2</span>]][a[<span class="number">1</span>]]&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
+<p><strong>给点启示：</strong> DP 优化的一个思路：合并等价状态、消除无用状态（这个有点像百钱买百只因）。</p>
+<hr>
+<h3 id="AT-dp-K"><a href="#AT-dp-K" class="headerlink" title="AT_dp_K"></a>AT_dp_K</h3><ul>
+<li>博弈论</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_k">传送门</a></p>
+<p>简单题。设 $f_i$ 表示剩余 $i$ 个石子时当前操作者的胜负，那么显然 $f_0&#x3D;0$。考虑转移，用点博弈论的知识，必败状态后继的所有状态都是必胜状态，那么写出转移 $f_i&#x3D;\max{[f_{i-a_j}&#x3D;0],1\le j\le n}$</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=k;++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;++j)&#123;</span><br><span class="line">    	<span class="keyword">if</span>(i-a[j]&lt;<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">    	f[i]|=(!f[i-a[j]]);</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="AT-dp-L"><a href="#AT-dp-L" class="headerlink" title="AT_dp_L"></a>AT_dp_L</h3><ul>
+<li>区间 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_l">传送门</a></p>
+<p>一个经典的 trick。设 $f_{i,j}$ 表示序列还剩下 $[i,j]$ 时，$X-Y$ 的最大值。转移要分两种情况，因为是两个人轮流取，一个会使答案增大，另一个使答案变小。</p>
+<p>具体地，当前操作次数为偶数，先手取改变 $X$，$f_{i,j}&#x3D;\max(f_{i+1,j}+a_i,f_{i,j-1}+a_j)$。</p>
+<p>否则后手取，$f_{i,j}&#x3D;\min(f_{i+1,j}-a_i,f_{i,j-1}-a_j)$。</p>
+<p>答案即为 $f_{1,n}$，时间复杂度 $O(n^2)$。</p>
+<p>与此题很类似的，还有 <a target="_blank" rel="noopener" href="https://atcoder.jp/contests/tdpc/tasks/tdpc_game">AT_tdpc_game</a>，可以左转<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/article/8lch1g1m">我的题解</a>。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> len=<span class="number">1</span>;len&lt;=n;++len)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i+len<span class="number">-1</span>&lt;=n;++i)&#123;</span><br><span class="line">		<span class="type">int</span> j=i+len<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">if</span>((n-len)&amp;<span class="number">1</span>) f[i][j]=<span class="built_in">min</span>(f[i+<span class="number">1</span>][j]-a[i],f[i][j<span class="number">-1</span>]-a[j]);</span><br><span class="line">		<span class="keyword">else</span> f[i][j]=<span class="built_in">max</span>(f[i+<span class="number">1</span>][j]+a[i],f[i][j<span class="number">-1</span>]+a[j]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此题还有一个贪心的思路，可以做到线性。</p>
+<p>考虑对于每三个数，如果中间的最大，那么一定是先手取两边，后手取中间，这样把序列中的这样结构的三个数贡献合并成两边减中间，此时序列一定先减后增，直接贪心即可。</p>
+<p>形式化地，$\forall a_{i-1},a_i,a_{i+1}(1&lt;i&lt;n)，s.t.\ a_i\ge a_{i-1}$ 且 $a_i\ge a_{i+1}$，将其改为 $f_i&#x3D;a_{i-1}+a_{i+1}-a_i$，剩余的不变。</p>
+<p>这个做法代码不贴了。</p>
+<p><strong>启示：</strong> 很多这种类似博弈两个人取数的题都可以转化成这种 DP 的状态设计，算是一个区间 DP 的套路了。</p>
+<hr>
+<h3 id="AT-dp-M"><a href="#AT-dp-M" class="headerlink" title="AT_dp_M"></a>AT_dp_M</h3><ul>
+<li>前缀和优化 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_m">传送门</a></p>
+<p>首先考虑一下朴素 DP，设 $f_{i,j}$ 表示进行到 $i$，已经分出去了 $j$ 块糖的方案数。那么显然 $f_{i,j}&#x3D;\sum_{k&#x3D;0}^{a_i}f_{i-1,k}$。每次转移都需要扫一遍，时间复杂度 $O(nk^2)$ 。</p>
+<p>但是发现每一层 DP 的状态只与上一层有关，所以可以直接使用前缀和优化，时间复杂度 $O(nk)$。</p>
+<p>代码不贴了，注意数组下标，前缀和容易 RE。</p>
+<p><strong>启示：</strong> 当发现 DP 转移时方程只与上一层有关时，可以考虑用一些求和数据结构优化（比如前缀和）。</p>
+<hr>
+<h3 id="AT-dp-N"><a href="#AT-dp-N" class="headerlink" title="AT_dp_N"></a>AT_dp_N</h3><ul>
+<li>区间 DP</li>
+<li>前缀和优化 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_n">传送门</a></p>
+<p>区间 DP 傻题，和 <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1775">石子合并</a> 一模一样。</p>
+<p>需要注意的一点是，朴素直接计算贡献是 $O(n^4)$ 的，使用前缀和优化到 $O(n^3)$。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=n;i&gt;=<span class="number">1</span>;--i)</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=i+<span class="number">1</span>;j&lt;=n;++j)</span><br><span class="line">      	<span class="keyword">for</span>(<span class="type">int</span> k=i;k&lt;j;++k)</span><br><span class="line">      		f[i][j]=<span class="built_in">min</span>(f[i][j],f[i][k]+f[k+<span class="number">1</span>][j]+sum[j]-sum[i<span class="number">-1</span>]);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="AT-dp-O"><a href="#AT-dp-O" class="headerlink" title="AT_dp_O"></a>AT_dp_O</h3><ul>
+<li>状压 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_o">传送门</a></p>
+<p><del>拜谢老头。</del> 看数据范围考虑状压 DP。发现一个合法的方案一定满足每一行、每一列只选一个 $1$，所以设 $f_{i,S}$ 表示进行到第 $i$ 行，此时选点集合为 $S$，复杂度 $O(n^22^n)$ 会 T 掉。但观察可知已知 $S$ 即可确定 $i$，是 $S$ 中 $1$ 的个数，所以可以直接设为 $f_S$，复杂度 $O(n2^n)$。</p>
+<p>Tips：popcount 用来计算二进制 $1$ 的个数。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">f[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> S=<span class="number">0</span>;S&lt;(<span class="number">1</span>&lt;&lt;n);++S)&#123;</span><br><span class="line">	<span class="type">int</span> k=__builtin_popcount(S);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;++j)&#123;</span><br><span class="line">		<span class="keyword">if</span>(!(S&amp;(<span class="number">1</span>&lt;&lt;j))&amp;&amp;a[k][j])</span><br><span class="line">			f[S|(<span class="number">1</span>&lt;&lt;j)]=(f[S|(<span class="number">1</span>&lt;&lt;j)]+f[S])%mod;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="AT-dp-P"><a href="#AT-dp-P" class="headerlink" title="AT_dp_P"></a>AT_dp_P</h3><ul>
+<li>树形 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_p">传送门</a></p>
+<p><del>没有舞会的上司。</del> 树上 DP 简单题。设 $f_{u,0&#x2F;1}$ 表示当前点为 $u$，当前点是否染成黑色。那么对于 $f_{u,0}$，它的子节点染成什么颜色对其没有限制，所以 $f_{u,0}&#x3D;\prod_{v\in u}(f_{v,0}+f_{v,1})$；而对于 $f_{u,1}$，子节点不能还是黑色，所以 $f_{u,1}&#x3D;\prod_{v\in u}f_{v,1}$。</p>
+<p>最后自底向上 dfs 即可，答案为 $f_{1,0}+f_{1,1}$，线性复杂度。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	f[u][<span class="number">0</span>]=f[u][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> v:e[u])&#123;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">dfs</span>(v,u);</span><br><span class="line">		f[u][<span class="number">0</span>]=f[u][<span class="number">0</span>]*(f[v][<span class="number">0</span>]+f[v][<span class="number">1</span>])%mod;</span><br><span class="line">		f[u][<span class="number">1</span>]=f[u][<span class="number">1</span>]*f[v][<span class="number">0</span>]%mod;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="AT-dp-Q"><a href="#AT-dp-Q" class="headerlink" title="AT_dp_Q"></a>AT_dp_Q</h3><ul>
+<li>数据结构优化 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_q">传送门</a></p>
+<p>最长上升子序列加权版。</p>
+<p>发现朴素的 DP 就是 朴素的 LIS，设 $f_i$ 表示以 $i$ 为结尾的最大答案，只是把每次的贡献从 $1$ 变成 $a_i$ 了。但这样做是 $O(n^2)$ 的，考虑每次都是选择 $h_j&lt;h_i$ 的最大 $f_j$，这样可以使用数据结构优化。$f_i&#x3D;a_i+\max{f_j,1\le j&lt;i,h_j&lt;h_i}$。需要支持单点修，区间求最值，复杂度 $O(n\ logn)$。</p>
+<p>这里使用了树状数组，因为要求的是前缀最大值，而且单点修改，树状数组比线段树更容易实现。</p>
+<p><strong>Code:</strong></p>
+<p>树状数组部分</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x,ll k)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=x;i&lt;=n;i+=<span class="built_in">lowbit</span>(i)) c[i]=<span class="built_in">max</span>(c[i],k);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	ll res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=x;i;i-=<span class="built_in">lowbit</span>(i)) res=<span class="built_in">max</span>(res,c[i]);</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主函数部分</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">	ll x,a;</span><br><span class="line">	cin&gt;&gt;a;</span><br><span class="line">	x=<span class="built_in">query</span>(h[i]<span class="number">-1</span>)+a;</span><br><span class="line">	ans=<span class="built_in">max</span>(ans,x);</span><br><span class="line">	<span class="built_in">add</span>(h[i],x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>启示：</strong> 对于一个 DP 转移方程，如果转移复杂度很高，要求的东西只与之前的值有关，可以尝试数据结构优化。</p>
+<hr>
+<h3 id="AT-dp-R"><a href="#AT-dp-R" class="headerlink" title="AT_dp_R"></a>AT_dp_R</h3><ul>
+<li>矩阵加速 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_r">传送门</a></p>
+<p>题目要求路径长度为 $k$ 的路径数，朴素的 DP 是直接设 $f_{k,i,j}$ 表示从 $i$ 到 $j$ 路径长度为 $k$ 的方案数，然后转移<br>$$f_{k,i,j}&#x3D;\sum_{u&#x3D;1}^nf_{k-1,i,u}+f_{1,u,j}$$</p>
+<p>发现这样转移复杂度会爆炸，因为 $k$ 是 $10^{18}$ 量级的，但是这个方程你会发现跟最短路中的 Floyd 非常像，这就是个显然的矩阵乘法形式，于是想到矩阵优化，对于每一个距离矩阵 $f_i$，$f_i&#x3D;f_{i-1}\times f_1$，那么直接快速幂即可，答案为 $f_1^{k}$ 的所有元素和。时间复杂度 $O(n^3\ logk)$，可以通过。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">matrix</span>&#123;</span><br><span class="line">	ll a[N][N];</span><br><span class="line">	<span class="built_in">matrix</span>()&#123;<span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="built_in">sizeof</span>(a));&#125;</span><br><span class="line">&#125;a;</span><br><span class="line">matrix <span class="keyword">operator</span> * (<span class="type">const</span> matrix&amp;a,<span class="type">const</span> matrix&amp;b)&#123;</span><br><span class="line">	matrix res;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;n;++j)</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;++k)</span><br><span class="line">				res.a[i][j]=(res.a[i][j]+a.a[i][k]*b.a[k][j]%mod)%mod;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">matrix <span class="title">ksm</span><span class="params">(matrix a,ll k)</span></span>&#123;</span><br><span class="line">	matrix res;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i) res.a[i][i]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(k)&#123;</span><br><span class="line">		<span class="keyword">if</span>(k&amp;<span class="number">1</span>) res=res*a;</span><br><span class="line">		a=a*a;</span><br><span class="line">		k&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>启示：</strong> 当一个线性 DP 发现转移数量非常多（一般达到了 $10^9$ 以上的量级），可以考虑矩阵优化。</p>
+<hr>
+<h3 id="AT-dp-S"><a href="#AT-dp-S" class="headerlink" title="AT_dp_S"></a>AT_dp_S</h3><ul>
+<li>数位 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_s">传送门</a></p>
+<p>看数据范围超级大想数位 DP。考虑记录 $3$ 个状态：当前位、是否达到最高位限制、当前数各位和模 $D$ 结果，边界条件是最后模 $D$ 为 $0$ 了答案加一。</p>
+<p>具体地，设 $f_{pos,m,limit}$ 表示当前考虑到第 $pos$ 位（倒序从最高位往后找），各个位上的和模 $D$ 为 $m$，是否顶到上界。边界条件 $f_{0,0,0&#x2F;1}&#x3D;1$，转移时<br>$$f_{pos,m,limit}&#x3D;\sum f_{pos-1,(m+i)%D,limit&amp;&amp;[i&#x3D;n]}$$</p>
+<p>注意，$i$ 表示当前枚举的下一位，$n$ 表示下一位的最大值。</p>
+<p><strong>警钟：</strong> 最后的答案要 -1，因为 $0$ 不算，但减一以后可能会变成负数（全为 $0$ 的情况），所以还要加 mod 再对 mod 取模。</p>
+<p>代码用记忆化搜索实现（因为太菜了不会递推），其实 $f$ 的第三维 $limit$ 可以不用设，但为了清晰还是写了。</p>
+<p><strong>Code:</strong></p>
+<p>记忆化搜索部分</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> pos,<span class="type">int</span> m,<span class="type">int</span> limit)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(pos==<span class="number">0</span>) <span class="keyword">return</span> (m==<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span>(~f[pos][m][limit]) <span class="keyword">return</span> f[pos][m][limit];</span><br><span class="line">	<span class="type">int</span> n=limit?a[pos]:<span class="number">9</span>,res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=n;++i) res=(res+<span class="built_in">dfs</span>(pos<span class="number">-1</span>,(m+i)%d,limit&amp;&amp;(i==n)))%mod;</span><br><span class="line">	<span class="keyword">return</span> f[pos][m][limit]=res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>主函数部分</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> l=<span class="built_in">strlen</span>(s);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;l;++i) a[l-i]=s[i]-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line"><span class="built_in">memset</span>(f,<span class="number">-1</span>,<span class="built_in">sizeof</span>(f));</span><br><span class="line">cout&lt;&lt;(<span class="built_in">dfs</span>(l,<span class="number">0</span>,<span class="number">1</span>)<span class="number">-1</span>+mod)%mod;</span><br></pre></td></tr></table></figure>
+<p><strong>启示：</strong> 当计算某些数的数量，且范围很大，考虑数位 DP，记忆化搜索可以便捷实现，注意是否要考虑前导零。</p>
+<hr>
+<h3 id="AT-dp-T"><a href="#AT-dp-T" class="headerlink" title="AT_dp_T"></a>AT_dp_T</h3><ul>
+<li>前缀和优化 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_t">传送门</a></p>
+<p>考虑设 $f_{i,j}$ 表示确定前 $i$ 个数，其中第 $i$ 个是 $j$ 的方案数，那么初始状态 $f_{1,1}&#x3D;1$。对于转移分两种情况讨论，如果 $s_i$ 是小于号，那么 $f_{i,j}&#x3D;\sum_{k&#x3D;1}^{j-1}f_{i-1,k}$，否则 $f_{i,j}&#x3D;\sum_{k&#x3D;j}^{i-1}f_{i-1,k}$。</p>
+<p>朴素的转移是 $O(n^3)$ 的。发现又是只与上一层状态有关，可以通过前缀和优化为 $O(n^2)$，于是可以通过此题。</p>
+<p>注意一下大于小于号与下标对应关系 qwq。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">f[<span class="number">1</span>][<span class="number">1</span>]=s[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=i;++j)&#123;</span><br><span class="line">		<span class="keyword">if</span>(ch[i]==<span class="string">&#x27;&lt;&#x27;</span>) f[i][j]=s[i<span class="number">-1</span>][j<span class="number">-1</span>]%mod;</span><br><span class="line">		<span class="keyword">else</span> f[i][j]=(f[i][j]+s[i<span class="number">-1</span>][i<span class="number">-1</span>]-s[i<span class="number">-1</span>][j<span class="number">-1</span>]+mod)%mod;</span><br><span class="line">		s[i][j]=(s[i][j<span class="number">-1</span>]+f[i][j])%mod;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) ans=(ans+f[n][i])%mod;</span><br></pre></td></tr></table></figure>
+<p><strong>启示：</strong> 与 $M$ 题相同。</p>
+<hr>
+<h3 id="AT-dp-U"><a href="#AT-dp-U" class="headerlink" title="AT_dp_U"></a>AT_dp_U</h3><ul>
+<li>状压 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_u">传送门</a></p>
+<p>看数据范围，显然是状压。考虑设 $f_S$ 表示已选兔子集合状态为 $S$ 的答案，设 $V_T$ 表示一组中的兔子状态为 $T$ 的贡献，那么可以写出转移方程 $f_S&#x3D;\max_{T\in S}{f_T+V_{\complement_ST}}$。</p>
+<p>那其实就做完了，先枚举集合并预处理数组 $V$，复杂度 $O(2^nn^2)$，然后枚举子集转移，复杂度 $O(3^n)$，于是做完了。</p>
+<p><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> s=<span class="number">1</span>;s&lt;(<span class="number">1</span>&lt;&lt;n);++s)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=i+<span class="number">1</span>;j&lt;n;++j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(((s&gt;&gt;i)&amp;<span class="number">1</span>)&amp;&amp;((s&gt;&gt;j)&amp;<span class="number">1</span>))&#123;</span><br><span class="line">                v[s]+=a[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    f[s]=v[s];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> s=<span class="number">1</span>;s&lt;(<span class="number">1</span>&lt;&lt;n);++s)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> cs=s;cs&gt;<span class="number">0</span>;cs=(cs<span class="number">-1</span>)&amp;s)&#123;</span><br><span class="line">        f[s]=<span class="built_in">max</span>(f[s],f[cs]+v[s^cs]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>启示：</strong> 枚举子集复杂度 $O(3^n)$，数据范围在 $20$ 以内有限考虑状压 DP。</p>
+<hr>
+<h3 id="AT-dp-V"><a href="#AT-dp-V" class="headerlink" title="AT_dp_V"></a>AT_dp_V</h3><ul>
+<li>树形 DP</li>
+<li>换根 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_v">传送门</a></p>
+<p>考虑树形 DP。设 $g_u$ 表示 $u$ 染成黑点，$u$ 的子树内的答案，转移的话可以 $g_u&#x3D;\prod_{v\in u}(g_v+1)$，表示对于每个儿子 $v$，都计算 $v$ 子树内的答案 $g_v$，以及 $v$ 染成白色，其子树全是白色的 $1$。这样总体做下来一次是 $O(n)$ 的。</p>
+<p>但是题目要求输出每一个点为根的答案，一次 dfs 只能计算一个点为根的答案，总体复杂度 $O(n^2)$ 不能接受，所以考虑使用换根 DP，在第二次 dfs 中求出所有点的答案。</p>
+<p>所以考虑设 $f_u$ 表示将 $u$ 染成黑色，$u$ 和其子树外的点所得的答案，那么显然对于每个点，最终的答案就是 $f_u\times g_u$。转移方程为 $f_v&#x3D;f_{u}+\frac{g_{u}}{g_v+1}+1$。这表示父亲 $u$ 的答案加上 $u$ 除 $v$ 的儿子的答案再加上白点的 $1$。时间复杂度 $O(n)$。</p>
+<p>本来这个题已经快乐地做完了，但问题在于答案需要取模，模数不一定是质数。这就十分棘手，因为你无法直接算逆元。所以考虑对于每个点 $u$ 记一个前缀积 $pre$ 和后缀积 $suf$，在第一遍 dfs 中预处理。这样转移时除法就变成了挖去此点的前后缀积。</p>
+<p>形式化地，$f_v&#x3D;f_u+pre_{u,i-1}\times suf_{u,i+1}+1$。其中 $i$ 表示 $v$ 是第几个儿子。代码中因为前后缀积的下标从 $0$ 开始，所以变成了 $pre_{u,i-2}\times suf_{u,i}$，本质上没有区别。</p>
+<p><strong>Code:</strong></p>
+<p>注意开 long long 和特殊的 $f_1&#x3D;1$。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs1</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	g[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> v:e[u])&#123;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="built_in">dfs1</span>(v,u);</span><br><span class="line">		g[u]=g[u]*(g[v]+<span class="number">1</span>)%mod;</span><br><span class="line">		pre[u].<span class="built_in">push_back</span>(g[v]+<span class="number">1</span>);</span><br><span class="line">		suf[u].<span class="built_in">push_back</span>(g[v]+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> l=pre[u].<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;l;++i) pre[u][i]=<span class="number">1ll</span>*pre[u][i<span class="number">-1</span>]*pre[u][i]%mod;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=l<span class="number">-2</span>;i&gt;=<span class="number">0</span>;--i) suf[u][i]=<span class="number">1ll</span>*suf[u][i+<span class="number">1</span>]*suf[u][i]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs2</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> l=pre[u].<span class="built_in">size</span>(),cnt=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> v:e[u])&#123;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		cnt++;</span><br><span class="line">		<span class="keyword">if</span>(l==<span class="number">1</span>) f[v]=f[u]+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cnt==<span class="number">1</span>) f[v]=f[u]*suf[u][<span class="number">1</span>]%mod+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(cnt==l) f[v]=f[u]*pre[u][cnt<span class="number">-2</span>]%mod+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> f[v]=f[u]*pre[u][cnt<span class="number">-2</span>]%mod*suf[u][cnt]%mod+<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">dfs2</span>(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>启示：</strong> 换根 DP 的套路。</p>
+<blockquote>
+<p>$1.$ 指定某个节点为根节点（一般为 $1$）。</p>
+<p>$2.$ 第一次搜索完成预处理，同时得到该节点的解。</p>
+<p>$3.$ 第二次搜索进行换根 DP，由已知节点推出相邻节点。</p>
+</blockquote>
+<hr>
+<h3 id="AT-dp-W"><a href="#AT-dp-W" class="headerlink" title="AT_dp_W"></a>AT_dp_W</h3><ul>
+<li>数据结构优化 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_w">传送门</a></p>
+<p>跟 NOIP T4 有点像对吧。先用一个经典的 trick，把一段区间的贡献转化为右端点的贡献，排序后只有到右端点才计算贡献，用一个结构体存储区间信息。</p>
+<p>设 $f_{i,j}$ 表示进行到位置 $i$，最后一个 $1$ 在位置 $j$ 的答案。考虑转移，如果 $i&#x3D;j$，也即在最后一个位置放了 $1$，那么 $f_{i,i}&#x3D;\max_{j&#x3D;1}^{i-1}f_{i-1,j}$。</p>
+<p>否则 $i\neq j$，考虑每一个转移相对于 $i-1$ 都是加上了右端点在 $i$ 且左端点包含 $j$ 的答案。<br>$$f_{i,j}&#x3D;f_{i-1,j}+\sum_{l_k\le j,r_k&#x3D;i} a_k$$</p>
+<p>这样朴素转移复杂度是 $O(n^2)$ 的，必须优化。考虑当  $i&#x3D;j$，查询了最值，对于 $i\neq j$，所有右端点 $i$ 的区间贡献都要累加到 DP 数组里，这是区间加的操作。于是可以使用线段树维护 DP 数组优化一下转移，这样的复杂度变成了 $O(n\ log n)$。</p>
+<p>空间复杂度部分，可以直接压到一维。注意每次的答案要与 $0$ 取 $\max$。</p>
+<p><strong>Code:</strong></p>
+<p>线段树部分就不放了，纯板子，查询是查询整体最值。</p>
+<p>代码中的 $v_i$ 表示第 $i$ 个命令。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">	<span class="built_in">update</span>(<span class="number">1</span>,i,i,<span class="built_in">query</span>());</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> u:v[i]) <span class="built_in">update</span>(<span class="number">1</span>,u.l,i,u.w);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="AT-dp-X"><a href="#AT-dp-X" class="headerlink" title="AT_dp_X"></a>AT_dp_X</h3><ul>
+<li>背包 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_x">传送门</a></p>
+<p>我们先考虑最优策略。对于两个物品 $i$，$j$，如果 $i$ 放到 $j$ 下面，那么 $i$ 上面除了 $j$ 以外还能放 $s_i-w_j$ 重量的物品；如果 $j$ 放到 $i$ 下面，就能放 $s_j-w_i$ 重量的物品。考虑上面能放的更多那就更优，即 $i$ 放 $j$ 下面当且仅当 $s_i-w_j&gt;s_j-w_i$，移项得 $s_i+w_i&gt;s_j+w_j$。所以我们根据 $s+w$ 排序，这样放一定最优。</p>
+<p>接下来 01 背包即可，答案为 $\max{f_i}$。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.w+a.s&lt;b.w+b.s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> f[<span class="number">20005</span>];</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;a[i].w&gt;&gt;a[i].s&gt;&gt;a[i].v;</span><br><span class="line">	<span class="built_in">sort</span>(a+<span class="number">1</span>,a+<span class="number">1</span>+n,cmp);</span><br><span class="line">	<span class="built_in">memset</span>(f,<span class="number">-0x3f</span>,<span class="built_in">sizeof</span>(f));	</span><br><span class="line">	f[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=a[i].s;j&gt;=<span class="number">0</span>;--j)&#123;</span><br><span class="line">			f[j+a[i].w]=<span class="built_in">max</span>(f[j+a[i].w],f[j]+a[i].v);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">20000</span>;++i) ans=<span class="built_in">max</span>(ans,f[i]);</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;endl; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="AT-dp-Y"><a href="#AT-dp-Y" class="headerlink" title="AT_dp_Y"></a>AT_dp_Y</h3><ul>
+<li>组合数学</li>
+<li>DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_y">传送门</a></p>
+<p>H 题的加强版。</p>
+<p>考虑设 $f_{i,j}$ 表示从 $(1,1)$ 走到 $(i,j)$，不经过障碍的方案数。先考虑没有障碍的简单情况，那么方案数就是 $\large \binom{i+j-2}{i-1}$，即选择 $i-1$ 步向下，剩下的向右。那么想想有障碍的转移，发现走到一个点的方案等于上述组合数减所有其左上角障碍的 $f$。想想为什么，因为所有会经过障碍的路都在左上角的障碍的 $f$ 里面。形式化地，$f_{i,j}&#x3D;calc(i,j)-\sum_{x&lt;&#x3D;i,y&lt;&#x3D;j,(x,y)\ne(i,j)}calc(x,y)$。这里的 $calc$ 就是指带入上面的组合数公式。所以处理一下组合数，时间复杂度 $O(n^2)$。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; a[M];</span><br><span class="line"><span class="function">ll <span class="title">ksm</span><span class="params">(ll a,ll b)</span></span>&#123;</span><br><span class="line">	ll res=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(b)&#123;</span><br><span class="line">		<span class="keyword">if</span>(b&amp;<span class="number">1</span>) res=res*a%mod;</span><br><span class="line">		a=a*a%mod;</span><br><span class="line">		b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line">ll f[M],fac[N&lt;&lt;<span class="number">1</span>],inv[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">	fac[<span class="number">0</span>]=inv[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2e5</span>;++i) fac[i]=fac[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">	inv[<span class="number">200000</span>]=<span class="built_in">ksm</span>(fac[<span class="number">200000</span>],mod<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2e5</span><span class="number">-1</span>;i&gt;=<span class="number">1</span>;--i) inv[i]=inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">C</span><span class="params">(ll n,ll m)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">0</span>||m==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> fac[n]*inv[m]%mod*inv[n-m]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">	cin&gt;&gt;h&gt;&gt;w&gt;&gt;n;</span><br><span class="line">	<span class="built_in">init</span>();</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;a[i].fi&gt;&gt;a[i].se;</span><br><span class="line">	n++;</span><br><span class="line">	a[n]=<span class="built_in">make_pair</span>(h,w);</span><br><span class="line">	<span class="built_in">sort</span>(a+<span class="number">1</span>,a+<span class="number">1</span>+n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">		f[i]=<span class="built_in">C</span>(a[i].fi+a[i].se<span class="number">-2</span>,a[i].fi<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;i;++j)&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[j].se&gt;a[i].se) <span class="keyword">continue</span>;</span><br><span class="line">			f[i]=(f[i]-f[j]*<span class="built_in">C</span>(a[i].fi-a[j].fi+a[i].se-a[j].se,a[i].fi-a[j].fi)%mod+mod)%mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[n]&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="AT-dp-Z"><a href="#AT-dp-Z" class="headerlink" title="AT_dp_Z"></a>AT_dp_Z</h3><ul>
+<li>斜率优化 DP</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/dp/tasks/dp_z">传送门</a></p>
+<p>a，b 题加强版。转移显然，设 $f_i$ 表示走到 $i$ 时的最小花费，那 $f_i&#x3D;\min_{1\le j&lt;i}(f_j+(h_i-h_j)^2+C)$。 </p>
+<p>拆开式子变成 $f_i&#x3D;f_j+h_i^2+h_j^2-2\times h_i\times h_j+C$。</p>
+<p>移项，把 $j$ 分离，$f_j+h_j^2&#x3D;f_i-h_i^2-C+2\times h_i\times h_j$。</p>
+<p>设 $y_j&#x3D;f_j+h_j^2$，$k_i&#x3D;2\times h_i$，$x_j&#x3D;h_j$，$b_i&#x3D;f_i-h_i^2$，变成了一次函数形式，可以斜率优化。</p>
+<p>题目要求最小值，维护下凸壳，又发现了 $y_j$ 和 $x_j$ 保证单调递增，所以使用单调队列维护，线性。</p>
+<p>斜率优化可以左转<a href="">我的题解</a></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">y</span><span class="params">(<span class="type">int</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> f[i]+h[i]*h[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> i,<span class="type">int</span> j)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (<span class="built_in">y</span>(i)-<span class="built_in">y</span>(j))/(h[i]-h[j]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;c;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;++i) cin&gt;&gt;h[i];</span><br><span class="line">	he=t=<span class="number">1</span>;</span><br><span class="line">	q[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">		<span class="keyword">while</span>(he&lt;t&amp;&amp;<span class="built_in">calc</span>(q[he],q[he+<span class="number">1</span>])&lt;=<span class="number">2</span>*h[i]) he++;</span><br><span class="line">		<span class="type">int</span> j=q[he];</span><br><span class="line">		f[i]=f[j]+(h[i]-h[j])*(h[i]-h[j])+c;</span><br><span class="line">		<span class="keyword">while</span>(he&lt;t&amp;&amp;<span class="built_in">calc</span>(q[t<span class="number">-1</span>],q[t])&gt;=<span class="built_in">calc</span>(q[t],i)) t--;</span><br><span class="line">		q[++t]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;f[n]&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>至此，<strong>26</strong> 个 AT_dp 已经结束，这其中几乎包含了所有比较简单的 DP 类型，获益匪浅。</p>
+<p>完结撒花！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">JKY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/31/AT_dp/">http://example.com/2024/03/31/AT_dp/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">kketchup的小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></div><div class="post_share"><div class="social-share" data-image="/img/4.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2024/03/31/CF631E/" title="CF631E"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CF631E</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/31/CF631E/" title="CF631E"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-31</div><div class="title">CF631E</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/4.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JKY</div><div class="author-info__description">且将新火试新茶，诗酒趁年华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%B2%E8%AF%9D"><span class="toc-text">闲话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-J"><span class="toc-text">AT_dp_J</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-K"><span class="toc-text">AT_dp_K</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-L"><span class="toc-text">AT_dp_L</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-M"><span class="toc-text">AT_dp_M</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-N"><span class="toc-text">AT_dp_N</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-O"><span class="toc-text">AT_dp_O</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-P"><span class="toc-text">AT_dp_P</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-Q"><span class="toc-text">AT_dp_Q</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-R"><span class="toc-text">AT_dp_R</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-S"><span class="toc-text">AT_dp_S</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-T"><span class="toc-text">AT_dp_T</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-U"><span class="toc-text">AT_dp_U</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-V"><span class="toc-text">AT_dp_V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-W"><span class="toc-text">AT_dp_W</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-X"><span class="toc-text">AT_dp_X</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-Y"><span class="toc-text">AT_dp_Y</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AT-dp-Z"><span class="toc-text">AT_dp_Z</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/31/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96/" title="斜率优化">斜率优化</a><time datetime="2024-03-31T14:00:20.511Z" title="发表于 2024-03-31 22:00:20">2024-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/31/CF631E/" title="CF631E">CF631E</a><time datetime="2024-03-31T13:59:23.608Z" title="发表于 2024-03-31 21:59:23">2024-03-31</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/31/AT_dp/" title="AT_dp">AT_dp</a><time datetime="2024-03-31T13:58:15.360Z" title="发表于 2024-03-31 21:58:15">2024-03-31</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By JKY</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
