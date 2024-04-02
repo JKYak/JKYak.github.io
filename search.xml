@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>字符串入门</title>
+      <link href="/2024/04/02/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+      <url>/2024/04/02/%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
+      
+        <content type="html"><![CDATA[<h2 id="字符串入门"><a href="#字符串入门" class="headerlink" title="字符串入门"></a>字符串入门</h2><h3 id="DFA"><a href="#DFA" class="headerlink" title="DFA"></a>DFA</h3><p>DFA，即确定有限状态自动机。用于判断输入的字符串是否符合要求。所有的字符串算法都是构造 DFA，结构有点像图灵机。</p><p>先给点定义：</p><ul><li>状态集 $Q$（有限）：若将自动机看成图，那么状态是顶点。</li><li>字符集 $\sum$：满足自动机要求的字符集。</li><li>可接受状态集 $F\subseteq Q$：是满足要求的状态。</li><li>初始状态 $q_0\in Q$：是初始空状态。</li><li>转移函数 $\delta$：$\delta\times \sum\rightarrow Q$ 是转移函数。</li></ul><p>整个算法流程就是，从初始状态 $q_0$ 出发，每次输入字符 $c$，并通过转移函数 $\delta$ 转移。最后若状态为 $F$，那么字符串符合要求。</p><h5 id="例题1：构造判断二进制数奇偶的-DFA"><a href="#例题1：构造判断二进制数奇偶的-DFA" class="headerlink" title="例题1：构造判断二进制数奇偶的 DFA"></a>例题1：构造判断二进制数奇偶的 DFA</h5><p>因为二进制数的奇偶性只与最后一位数是 $0$ 还是 $1$ 有关。所以这里构造的 DFA 用 $q$ 表示当前二进制数的奇偶性，每次输入的字符判断，如果是与当前 $q$ 相同就不变，否则转移到另一个。</p><p><img src="/../../../../img/%E5%AD%97%E7%AC%A6%E4%B8%B2.png" alt="看个图"></p><h5 id="例题2：构造"><a href="#例题2：构造" class="headerlink" title="例题2：构造"></a>例题2：构造</h5>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 算法笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CF161D</title>
       <link href="/2024/04/01/CF161D/"/>
       <url>/2024/04/01/CF161D/</url>
