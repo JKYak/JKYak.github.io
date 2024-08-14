@@ -1,0 +1,215 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>P4905 | kketchup的小窝</title><meta name="author" content="JKY"><meta name="copyright" content="JKY"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="P4905 报纸【题目描述】在 $n\times n$ 的方阵中，称一个点为特殊点当且仅当此点横纵坐标不互质，即 $(i,j)$ 满足 $\gcd(i,j)\ne1$。 一次操作可以任选一个 $1\times 2$ 的矩形并覆盖，矩形不能超出边界，求使所有特殊点都被覆盖的最小操作数。 $n\le 233$（其实可以加强到 $500$）。 【题目解析】看到这个题首先想到打表，不直接输入特殊点，而是固">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P4905">
+<meta property="og:url" content="http://example.com/2024/08/14/P4905/index.html">
+<meta property="og:site_name" content="kketchup的小窝">
+<meta property="og:description" content="P4905 报纸【题目描述】在 $n\times n$ 的方阵中，称一个点为特殊点当且仅当此点横纵坐标不互质，即 $(i,j)$ 满足 $\gcd(i,j)\ne1$。 一次操作可以任选一个 $1\times 2$ 的矩形并覆盖，矩形不能超出边界，求使所有特殊点都被覆盖的最小操作数。 $n\le 233$（其实可以加强到 $500$）。 【题目解析】看到这个题首先想到打表，不直接输入特殊点，而是固">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/4.webp">
+<meta property="article:published_time" content="2024-08-14T09:04:04.843Z">
+<meta property="article:modified_time" content="2024-08-14T09:49:03.297Z">
+<meta property="article:author" content="JKY">
+<meta property="article:tag" content="题解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/4.webp"><link rel="shortcut icon" href="/img/1.jpg"><link rel="canonical" href="http://example.com/2024/08/14/P4905/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'P4905',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-14 17:49:03'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="kketchup的小窝" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/4.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/3.png')"><nav id="nav"><span id="blog-info"><a href="/" title="kketchup的小窝"><span class="site-name">kketchup的小窝</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">P4905</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-14T09:04:04.843Z" title="发表于 2024-08-14 17:04:04">2024-08-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-14T09:49:03.297Z" title="更新于 2024-08-14 17:49:03">2024-08-14</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="P4905"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="P4905-报纸"><a href="#P4905-报纸" class="headerlink" title="P4905 报纸"></a><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4905">P4905 报纸</a></h2><h4 id="【题目描述】"><a href="#【题目描述】" class="headerlink" title="【题目描述】"></a>【题目描述】</h4><p>在 $n\times n$ 的方阵中，称一个点为特殊点当且仅当此点横纵坐标不互质，即 $(i,j)$ 满足 $\gcd(i,j)\ne1$。</p>
+<p>一次操作可以任选一个 $1\times 2$ 的矩形并覆盖，矩形不能超出边界，求使所有特殊点都被覆盖的最小操作数。</p>
+<p>$n\le 233$（其实可以加强到 $500$）。</p>
+<h4 id="【题目解析】"><a href="#【题目解析】" class="headerlink" title="【题目解析】"></a>【题目解析】</h4><p>看到这个题首先想到打表，不直接输入特殊点，而是固定的，不就是让我们打表吗。</p>
+<p>我们直接 $O(n^2\log n)$ 暴力算出所有特殊点的位置，然后标记为 $1$，依赖于 $1$ 的联通块大小会很大，爆搜枚举联通块摆放方案即可（好像爆搜不打表也直接能过）。</p>
+<p>附上打好的表（前 $233$，答案为 $ans_n$）：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> ans[<span class="number">300</span>]=&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">19</span>,<span class="number">22</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">43</span>,<span class="number">44</span>,<span class="number">57</span>,<span class="number">64</span>,<span class="number">79</span>,<span class="number">80</span>,<span class="number">97</span>,<span class="number">98</span>,<span class="number">117</span>,<span class="number">126</span>,<span class="number">147</span>,<span class="number">148</span>,<span class="number">171</span>,<span class="number">176</span>,<span class="number">201</span>,<span class="number">210</span>,<span class="number">237</span>,<span class="number">238</span>,<span class="number">267</span>,<span class="number">268</span>,<span class="number">299</span>,<span class="number">312</span>,<span class="number">345</span>,<span class="number">356</span>,<span class="number">391</span>,<span class="number">392</span>,<span class="number">429</span>,<span class="number">444</span>,<span class="number">483</span>,<span class="number">484</span>,<span class="number">525</span>,<span class="number">526</span>,<span class="number">569</span>,<span class="number">590</span>,<span class="number">635</span>,<span class="number">636</span>,<span class="number">683</span>,<span class="number">690</span>,<span class="number">739</span>,<span class="number">758</span>,<span class="number">809</span>,<span class="number">810</span>,<span class="number">863</span>,<span class="number">880</span>,<span class="number">933</span>,<span class="number">954</span>,<span class="number">1011</span>,<span class="number">1012</span>,<span class="number">1071</span>,<span class="number">1072</span>,<span class="number">1133</span>,<span class="number">1160</span>,<span class="number">1223</span>,<span class="number">1240</span>,<span class="number">1305</span>,<span class="number">1306</span>,<span class="number">1373</span>,<span class="number">1398</span>,<span class="number">1467</span>,<span class="number">1468</span>,<span class="number">1539</span>,<span class="number">1540</span>,<span class="number">1613</span>,<span class="number">1648</span>,<span class="number">1723</span>,<span class="number">1740</span>,<span class="number">1817</span>,<span class="number">1818</span>,<span class="number">1897</span>,<span class="number">1924</span>,<span class="number">2005</span>,<span class="number">2006</span>,<span class="number">2089</span>,<span class="number">2112</span>,<span class="number">2195</span>,<span class="number">2226</span>,<span class="number">2313</span>,<span class="number">2314</span>,<span class="number">2403</span>,<span class="number">2424</span>,<span class="number">2513</span>,<span class="number">2546</span>,<span class="number">2639</span>,<span class="number">2662</span>,<span class="number">2757</span>,<span class="number">2758</span>,<span class="number">2855</span>,<span class="number">2894</span>,<span class="number">2993</span>,<span class="number">2994</span>,<span class="number">3095</span>,<span class="number">3096</span>,<span class="number">3199</span>,<span class="number">3256</span>,<span class="number">3361</span>,<span class="number">3362</span>,<span class="number">3469</span>,<span class="number">3470</span>,<span class="number">3579</span>,<span class="number">3618</span>,<span class="number">3729</span>,<span class="number">3730</span>,<span class="number">3843</span>,<span class="number">3870</span>,<span class="number">3985</span>,<span class="number">4030</span>,<span class="number">4147</span>,<span class="number">4170</span>,<span class="number">4289</span>,<span class="number">4300</span>,<span class="number">4421</span>,<span class="number">4464</span>,<span class="number">4587</span>,<span class="number">4612</span>,<span class="number">4737</span>,<span class="number">4738</span>,<span class="number">4865</span>,<span class="number">4910</span>,<span class="number">5039</span>,<span class="number">5040</span>,<span class="number">5171</span>,<span class="number">5196</span>,<span class="number">5329</span>,<span class="number">5392</span>,<span class="number">5527</span>,<span class="number">5528</span>,<span class="number">5665</span>,<span class="number">5666</span>,<span class="number">5805</span>,<span class="number">5854</span>,<span class="number">5995</span>,<span class="number">6018</span>,<span class="number">6161</span>,<span class="number">6194</span>,<span class="number">6339</span>,<span class="number">6402</span>,<span class="number">6549</span>,<span class="number">6550</span>,<span class="number">6699</span>,<span class="number">6700</span>,<span class="number">6851</span>,<span class="number">6908</span>,<span class="number">7061</span>,<span class="number">7096</span>,<span class="number">7251</span>,<span class="number">7252</span>,<span class="number">7409</span>,<span class="number">7464</span>,<span class="number">7623</span>,<span class="number">7652</span>,<span class="number">7813</span>,<span class="number">7814</span>,<span class="number">7977</span>,<span class="number">8062</span>,<span class="number">8227</span>,<span class="number">8228</span>,<span class="number">8395</span>,<span class="number">8408</span>,<span class="number">8577</span>,<span class="number">8640</span>,<span class="number">8811</span>,<span class="number">8812</span>,<span class="number">8985</span>,<span class="number">9046</span>,<span class="number">9215</span>,<span class="number">9276</span>,<span class="number">9453</span>,<span class="number">9454</span>,<span class="number">9633</span>,<span class="number">9634</span>,<span class="number">9815</span>,<span class="number">9878</span>,<span class="number">10061</span>,<span class="number">10102</span>,<span class="number">10287</span>,<span class="number">10314</span>,<span class="number">10501</span>,<span class="number">10582</span>,<span class="number">10771</span>,<span class="number">10772</span>,<span class="number">10963</span>,<span class="number">10964</span>,<span class="number">11157</span>,<span class="number">11256</span>,<span class="number">11451</span>,<span class="number">11452</span>,<span class="number">11649</span>,<span class="number">11650</span>,<span class="number">11849</span>,<span class="number">11918</span>,<span class="number">12119</span>,<span class="number">12154</span>,<span class="number">12357</span>,<span class="number">12404</span>,<span class="number">12607</span>,<span class="number">12682</span>,<span class="number">12889</span>,<span class="number">12918</span>,<span class="number">13127</span>,<span class="number">13128</span>,<span class="number">13339</span>,<span class="number">13412</span>,<span class="number">13625</span>,<span class="number">13672</span>,<span class="number">13887</span>,<span class="number">13924</span>,<span class="number">14141</span>,<span class="number">14216</span>,<span class="number">14435</span>,<span class="number">14464</span>,<span class="number">14685</span>,<span class="number">14686</span>,<span class="number">14909</span>,<span class="number">15014</span>,<span class="number">15239</span>,<span class="number">15240</span>,<span class="number">15467</span>,<span class="number">15468</span>,<span class="number">15697</span>,<span class="number">15808</span>,<span class="number">16039</span>,<span class="number">16040</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>各种乱搞贪心做法也很好想，已被 hack，目前最高得到 $95$ 分。</p>
+<p>接下来提供一种所谓的正解。</p>
+<p>看到题目中 $1\times2$ 的矩形覆盖性质，有点像最小点覆盖问题。</p>
+<p>顺着这个思路想，对网格图黑白染色以后连边情况变成二分图，于是网络流即可。</p>
+<p>代码实现使用 $\text{Dinic}，$设边数为 $m$，则时间复杂度 $O(m\sqrt m)$。实测 $n&#x3D;500$ 时总边数在 $3\times 10^5$ 左右，跑得飞快。</p>
+<p><strong>实现细节：</strong></p>
+<ul>
+<li><p>$O(n^2\log n)$ 时间暴力连边处理（$\log$ 来自 $\gcd$）。源点连黑点，白点连汇点，相邻的特殊点黑点连向白点，这样一定是二分图。</p>
+</li>
+<li><p>最小点覆盖 $&#x3D;$ 总点数 $-$ 最大匹配。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> endl <span class="string">&#x27;\n&#x27;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cal(x,y) ((x-1)*n+y)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">300</span>,M=N*N,INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="type">int</span> n,s,t,cnt,ans;</span><br><span class="line"><span class="type">bool</span> c[N][N];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">    <span class="type">int</span> v,next,w;</span><br><span class="line">&#125;e[M&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> head[M],tot=<span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w)</span></span>&#123;</span><br><span class="line">    e[++tot]=&#123;v,head[u],w&#125;;</span><br><span class="line">    head[u]=tot;</span><br><span class="line">    e[++tot]=&#123;u,head[v],!w&#125;;</span><br><span class="line">    head[v]=tot;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> dis[M],now[M];</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">bfs</span><span class="params">()</span></span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    <span class="built_in">memset</span>(dis,<span class="number">0</span>,<span class="built_in">sizeof</span>(dis));</span><br><span class="line">    q.<span class="built_in">push</span>(s),dis[s]=<span class="number">1</span>;</span><br><span class="line">    now[s]=head[s];</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="type">int</span> u=q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=head[u];i;i=e[i].next)&#123;</span><br><span class="line">            <span class="type">int</span> v=e[i].v;</span><br><span class="line">            <span class="keyword">if</span>(!dis[v]&amp;&amp;e[i].w)&#123;</span><br><span class="line">                dis[v]=dis[u]+<span class="number">1</span>;</span><br><span class="line">                q.<span class="built_in">push</span>(v);</span><br><span class="line">                now[v]=head[v];</span><br><span class="line">                <span class="keyword">if</span>(v==t) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> sum)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(u==t) <span class="keyword">return</span> sum;</span><br><span class="line">    <span class="type">int</span> res=<span class="number">0</span>,tmp;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=now[u];i&amp;&amp;sum;i=e[i].next)&#123;</span><br><span class="line">        now[u]=i;</span><br><span class="line">        <span class="type">int</span> v=e[i].v;</span><br><span class="line">        <span class="keyword">if</span>((dis[v]==dis[u]+<span class="number">1</span>)&amp;&amp;e[i].w)&#123;</span><br><span class="line">            tmp=<span class="built_in">dfs</span>(v,<span class="built_in">min</span>(e[i].w,sum));</span><br><span class="line">            <span class="keyword">if</span>(!tmp) dis[v]=<span class="number">0</span>;</span><br><span class="line">            e[i].w-=tmp,e[i^<span class="number">1</span>].w+=tmp;</span><br><span class="line">            sum-=tmp,res+=tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">gcd</span>(b,a%b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    s=n*n+<span class="number">1</span>,t=s+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">2</span>;j&lt;=n;++j)&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">gcd</span>(i,j)!=<span class="number">1</span>)&#123;</span><br><span class="line">                c[i][j]=<span class="number">1</span>;</span><br><span class="line">                cnt++;</span><br><span class="line">                <span class="type">int</span> odd=(i+j)&amp;<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(odd) <span class="built_in">add</span>(<span class="built_in">cal</span>(i,j),t,<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">else</span> <span class="built_in">add</span>(s,<span class="built_in">cal</span>(i,j),<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>(c[i<span class="number">-1</span>][j]) <span class="built_in">add</span>(<span class="built_in">cal</span>(i<span class="number">-1</span>,j),<span class="built_in">cal</span>(i,j),odd);</span><br><span class="line">                <span class="keyword">if</span>(c[i][j<span class="number">-1</span>]) <span class="built_in">add</span>(<span class="built_in">cal</span>(i,j<span class="number">-1</span>),<span class="built_in">cal</span>(i,j),odd);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">bfs</span>()) ans+=<span class="built_in">dfs</span>(s,INF);</span><br><span class="line">    cout&lt;&lt;cnt-ans&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有问题或错误欢迎交流，个人觉得码风还行，完结撒花！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">JKY</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2024/08/14/P4905/">http://example.com/2024/08/14/P4905/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">kketchup的小窝</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A2%98%E8%A7%A3/">题解</a></div><div class="post_share"><div class="social-share" data-image="/img/4.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/08/12/Tarjan/" title="Tarjan"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Tarjan</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/04/01/CF161D/" title="CF161D"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-04-01</div><div class="title">CF161D</div></div></a></div><div><a href="/2024/05/24/CF176B/" title="CF176B"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-24</div><div class="title">CF176B</div></div></a></div><div><a href="/2024/03/31/AT_dp/" title="AT_dp"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-31</div><div class="title">AT_dp</div></div></a></div><div><a href="/2024/03/31/CF631E/" title="CF631E"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-31</div><div class="title">CF631E</div></div></a></div><div><a href="/2024/07/01/CF1840C/" title="CF1840C"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-01</div><div class="title">CF1840C</div></div></a></div><div><a href="/2024/07/01/CF746G/" title="CF746G"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-07-01</div><div class="title">CF746G</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/4.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">JKY</div><div class="author-info__description">且将新火试新茶，诗酒趁年华</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#P4905-%E6%8A%A5%E7%BA%B8"><span class="toc-text">P4905 报纸</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0%E3%80%91"><span class="toc-text">【题目描述】</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E3%80%90%E9%A2%98%E7%9B%AE%E8%A7%A3%E6%9E%90%E3%80%91"><span class="toc-text">【题目解析】</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/14/P4905/" title="P4905">P4905</a><time datetime="2024-08-14T09:04:04.843Z" title="发表于 2024-08-14 17:04:04">2024-08-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/12/Tarjan/" title="Tarjan">Tarjan</a><time datetime="2024-08-12T09:51:08.166Z" title="发表于 2024-08-12 17:51:08">2024-08-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/11/%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86%E4%BC%98%E5%8C%96DP/" title="长链剖分优化DP">长链剖分优化DP</a><time datetime="2024-08-11T10:27:21.187Z" title="发表于 2024-08-11 18:27:21">2024-08-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/01/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/" title="莫比乌斯反演">莫比乌斯反演</a><time datetime="2024-07-01T11:48:30.653Z" title="发表于 2024-07-01 19:48:30">2024-07-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/07/01/%E6%9C%9F%E6%9C%9BDP/" title="期望DP">期望DP</a><time datetime="2024-07-01T11:41:29.373Z" title="发表于 2024-07-01 19:41:29">2024-07-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By JKY</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, '']
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
